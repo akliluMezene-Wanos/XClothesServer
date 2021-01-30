@@ -30,7 +30,12 @@ const client = new Client({
       resp.write("IN GET");
       resp.end();
   }); 
+
+  app.get("/clothes", (req, resp) => {
+      resp.write("In /clothes");
+      resp.end();
+  })
   
   const port = 3000;
-  app.listen(port, function () {console.log("server is started and listening to port" +)});
+  app.listen(port, function () {console.log("server is started and listening to port " + port)});
   
