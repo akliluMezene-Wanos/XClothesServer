@@ -14,10 +14,12 @@ const client = new Client({
   .then(function (result) {
     console.log("success!");
     console.log(result.rowCount);
+    client.end();
   })
   .catch(function (error) {
    console.log("ooops");
    console.log(error);
+   client.end();
   });
 
   console.log("server is finishing");
