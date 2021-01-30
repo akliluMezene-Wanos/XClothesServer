@@ -9,10 +9,16 @@ const client = new Client({
   })
   
   client.connect()
-  client.query('SELECT NOW()', (err, res) => {
-    console.log(err, res)
-    client.end()
+  client
+  .query('SELECT * FROM manufacturer')
+  .then(function (result) {
+    console.log("success!");
+    console.log(result.rowCount);
   })
+  .catch(function (error) {
+   console.log("ooops");
+   console.log(error);
+  });
 
   console.log("server is finishing");
   
