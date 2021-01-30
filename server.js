@@ -1,4 +1,7 @@
 const { Client } = require('pg')
+const expres = require("express");
+
+app = expres();
 
 const client = new Client({
     user: 'postgres',
@@ -22,5 +25,6 @@ const client = new Client({
    client.end();
   });
 
+  app.listen(3000, function () {console.log("server is started")});
   console.log("server is finishing");
   
