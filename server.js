@@ -11,20 +11,26 @@ const client = new Client({
     port: 5432,
   })
   
-  client.connect()
-  client
-  .query('SELECT * FROM manufacturer')
-  .then(function (result) {
-    console.log("success!");
-    console.log(result.rowCount);
-    client.end();
-  })
-  .catch(function (error) {
-   console.log("ooops");
-   console.log(error);
-   client.end();
-  });
+//   client.connect()
+//   client
+//   .query('SELECT * FROM manufacturer')
+//   .then(function (result) {
+//     console.log("success!");
+//     console.log(result.rowCount);
+//     client.end();
+//   })
+//   .catch(function (error) {
+//    console.log("ooops");
+//    console.log(error);
+//    client.end();
+//   });
 
-  app.listen(3000, function () {console.log("server is started")});
-  console.log("server is finishing");
+  
+  app.get("/", (req, resp) => {
+      resp.write("IN GET");
+      resp.end();
+  }); 
+  
+  const port = 3000;
+  app.listen(port, function () {console.log("server is started and listening to port" +)});
   
