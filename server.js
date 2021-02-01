@@ -20,8 +20,7 @@ app.get("/clothes", (req, resp) => {
     .then(function (result) {
       console.log("succes!");
       console.log(result.rowCount);
-      console.log(result.rows);
-      resp.write("Success");
+      resp.write(result.rows);
       resp.end();
     })
     .catch(function (error) {
