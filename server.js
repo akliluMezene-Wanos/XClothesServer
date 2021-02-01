@@ -1,5 +1,6 @@
 const { Client } = require("pg");
 const expres = require("express");
+const { json } = require("body-parser");
 
 app = expres();
 
@@ -10,23 +11,28 @@ const client = new Client({
   password: "klwklw",
   port: 5432,
 });
- 
+
 client.connect();
 
 app.get("/clothes", (req, resp) => {
-  
   client
     .query("SELECT * FROM clothes")
     .then(function (result) {
       console.log("succes!");
       console.log(result.rowCount);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
       resp.write(JSON.stringify(result.rows));
       resp.end();
     })
     .catch(function (error) {
       console.log("ooops");
       console.log(error);
-      resp.write("Failed");
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify("Failed"));
       resp.end();
     });
 });
