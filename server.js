@@ -20,7 +20,7 @@ app.get("/clothes", (req, resp) => {
     .then(function (result) {
       console.log("succes!");
       console.log(result.rowCount);
-      resp.write(result.rows);
+      resp.write(JSON.stringify(result.rows));
       resp.end();
     })
     .catch(function (error) {
