@@ -1,12 +1,9 @@
 const { Client } = require("pg");
 const express = require("express"); 
-//const { urlencoded } = require("body-parser");
 
 app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-// app.use(express.json());
-// app.use(express.urlencoded({extended: true}));
 
 const client = new Client({
   user: "postgres",
@@ -17,6 +14,44 @@ const client = new Client({
 });
 
 client.connect();
+
+
+app.delete("/clothes", (req, resp) => {
+  console.log("In /clothes DELETE")
+  resp.write("Please add the id at the path, eg like /clothes:21, inorder to delete at the id-21 ");
+  resp.end();
+
+});
+
+app.delete("/clothes/:id", (req, resp) => {
+  console.log("In /clothes DELETE")
+  
+  const myQuery = {
+    text: "DELETE FROM clothes WHERE id = $1",
+    values: [req.params.id]
+  };
+  client
+    .query(myQuery)
+    .then(function (result) {
+      console.log("succes!");
+      console.log(result.rowCount);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify("ok"));
+      resp.end();
+    })
+    .catch(function (error) {
+      console.log("ooops");
+      console.log(error);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify("Failed"));  
+      resp.end();
+    });
+});
+
 
 app.post("/clothes", (req, resp) => {
   console.log("in /clothes POST"); 
