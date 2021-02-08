@@ -195,14 +195,33 @@ app.get("/manufacturer", (req, resp) => {
     }); 
 });
 
-app.get("/", (req, resp) => {
-  resp.write("In GET /");
-  resp.end();
-});
+app.post("/orders", (req, resp) =>  {
+  console.log("In /orders POST");
 
-const port = 3000;
-app.listen(port, function () {
-  console.log("server is started and listening to port " + port);
+ const myQuery = {
+  text: "INSERT INTO orders (order_date, cloth_id, quantity, customer_code) VALUES ($1, $2,$3,$4)",
+  values: [req.body.order_date, req.body.cloth_id, req.body.quantity, req.body.customer_code]
+};
+client
+  .query(myQuery)
+  .then(function (result) {
+    console.log("success!");
+    console.log(result.rowCount);
+    resp.writeHead(200, {
+      "Content-Type": "text/json",
+    });
+    resp.write(JSON.stringify("ok"));
+    resp.end();
+  })
+  .catch(function (error) {
+    console.log("ooops");
+    console.log(error);
+    resp.writeHead(200, {
+      "Content-Type": "text/json",
+    });
+    resp.write(JSON.stringify("Failed"));
+    resp.end();
+  });
 });
 
 app.get("/orders", (req, resp) => {
@@ -232,3 +251,14 @@ app.get("/orders", (req, resp) => {
       resp.end();
     });
 });
+
+app.get("/", (req, resp) => {
+  resp.write("In GET /");
+  resp.end();
+});
+
+const port = 3000;
+app.listen(port, function () {
+  console.log("server is started and listening to port " + port);
+});
+
