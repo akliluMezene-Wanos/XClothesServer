@@ -110,6 +110,12 @@ app.get("/clothes", (req, resp) => {
     });
 });
 
+app.post("/manufacturer", (req, resp) => {
+ console.log("In /manufacturer POST");
+ resp.write("done");
+ resp.end();
+});
+
 app.get("/manufacturer", (req, resp) => {
   let filterName = req.query.filterName;
   const myQuery = {
