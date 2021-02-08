@@ -195,6 +195,34 @@ app.get("/manufacturer", (req, resp) => {
     }); 
 });
 
+app.delete("/orders/:id", (req, resp) => {
+  console.log("IN /orders/:id DELETE");
+const myQuery = {
+  text: "DELETE FROM orders WHERE id = $1",
+  values: [req.params.id]
+};
+client
+  .query(myQuery)
+  .then((result) => {
+    console.log("succes!");
+    console.log(result.rowCount);
+    resp.writeHead(200, {
+      "Content-Type": "text/json"
+    });
+    resp.write(JSON.stringify("ok"));
+    resp.end();
+  })
+  .catch((error) => {
+    console.log("ooops");
+    console.log(error);
+    resp.writeHead(200, {
+      "Content-Type": "text/json"
+    });
+    resp.write(JSON.stringify("Failed"));  
+    resp.end();
+  });
+});
+
 app.post("/orders", (req, resp) =>  {
   console.log("In /orders POST");
 
