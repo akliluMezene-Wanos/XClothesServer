@@ -110,6 +110,34 @@ app.get("/clothes", (req, resp) => {
     });
 });
 
+app.delete("/manufacturer/:id", (req, resp) => {
+console.log("IN /manufacturer/:id DELETE");
+const myQuery = {
+  text: "DELETE FROM manufacturer WHERE id = $1",
+  values: [req.params.id]
+};
+client
+  .query(myQuery)
+  .then((result) => {
+    console.log("succes!");
+    console.log(result.rowCount);
+    resp.writeHead(200, {
+      "Content-Type": "text/json"
+    });
+    resp.write(JSON.stringify("ok"));
+    resp.end();
+  })
+  .catch((error) => {
+    console.log("ooops");
+    console.log(error);
+    resp.writeHead(200, {
+      "Content-Type": "text/json"
+    });
+    resp.write(JSON.stringify("Failed"));  
+    resp.end();
+  });
+});
+
 app.post("/manufacturer", (req, resp) => {
  console.log("In /manufacturer POST");
 
