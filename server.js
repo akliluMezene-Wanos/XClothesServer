@@ -110,6 +110,11 @@ app.get("/clothes", (req, resp) => {
     });
 });
 
+app.get("/manufacturer", (req, resp) => {
+  resp.write("IN /manufacturer GET");
+  resp.end();
+});
+
 app.get("/", (req, resp) => {
   resp.write("In GET /");
   resp.end();

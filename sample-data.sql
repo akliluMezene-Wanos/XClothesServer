@@ -20,8 +20,7 @@ INSERT INTO clothes (code, manufacturer_id, image_filename, short_description, d
 ('P21JB ', 2, 'image/jacket_dblue.png', '100% polyester', 'FUNCTIONALITY: Center front zipper closure: Two welt pockets with zipper closures; Flight pocket on left sleeve with zipper closure.', TRUE),
 ('B08FDCL5ZR ', 4,'image/T-Shirt_grey.png ', '90% Cotton, 10% Polyester', 'If you are into archaeological sites and history of the ancient world, then this awesome Athens acropolis gift is just for you -- or any fan of Greek mythology, Greek vacations, and Greek history.', TRUE),
 ('B08G2F1JMQ ', 6, 'image/women-T-Shirt_green.png ', '100% Cotton,Greece Hellas Greek National Flag Heritage Gift', 'Perfect Summer Vacation, Travel Outfit for any Fan of Greece. This Flag Map of Hellas & Greek makes a perfect Gift for any Greek citizen, Fan of the Greek Mythology & History. Greek Greece Hellas Outfit fur Greek Lovers and Summer Vacations & Travel Trips to Europe.', FALSE),
-('cotn6717', 6, 'images/coat_brown.png', '100% cotton', 'can be dressed at all weather and geography', TRUE),
-('B07NNN4HHQ', 7, 'image/Trouser_unisexnavy.png ', 'Machine wash cold with like colors, dry low heat', 'Solid colors: 80% Cotton, 20% Polyester; Heather Grey: 78% Cotton, 22% Poly; Dark Heather: 50% Cotton, 50% Polyester', TRUE);
+('cotn6717', 6, 'images/coat_brown.png', '100% cotton', 'can be dressed at all weather and geography', TRUE);
 
 
 
