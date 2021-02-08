@@ -204,3 +204,31 @@ const port = 3000;
 app.listen(port, function () {
   console.log("server is started and listening to port " + port);
 });
+
+app.get("/orders", (req, resp) => {
+  let filterCustomer = req.query.filterCustomer;
+  const myQuery = {
+    text: "SELECT * FROM orders WHERE customer_code LIKE $1",
+    values: ["%" + filterCustomer + "%"],
+  };
+  client
+    .query(myQuery)
+    .then(function (result) {
+      console.log("succes!");
+      console.log(result.rowCount);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify(result.rows));
+      resp.end();
+    })
+    .catch(function (error) {
+      console.log("ooops");
+      console.log(error);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify("Failed"));
+      resp.end();
+    });
+});
