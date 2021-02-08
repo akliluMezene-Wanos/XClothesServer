@@ -111,8 +111,31 @@ app.get("/clothes", (req, resp) => {
 });
 
 app.get("/manufacturer", (req, resp) => {
-  resp.write("IN /manufacturer GET");
-  resp.end();
+  let filterName = req.query.filterName;
+  const myQuery = {
+    text: "SELECT * FROM manufacturer WHERE manufacturer_name LIKE $1",
+    values: ["%" + filterName + "%"],
+  };
+  client
+    .query(myQuery)
+    .then(function (result) {
+      console.log("succes!");
+      console.log(result.rowCount);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify(result.rows));
+      resp.end();
+    })
+    .catch(function (error) {
+      console.log("ooops");
+      console.log(error);
+      resp.writeHead(200, {
+        "Content-Type": "text/json",
+      });
+      resp.write(JSON.stringify("Failed"));
+      resp.end();
+    }); 
 });
 
 app.get("/", (req, resp) => {
