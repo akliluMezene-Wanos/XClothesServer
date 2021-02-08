@@ -58,7 +58,7 @@ app.post("/clothes", (req, resp) => {
   
   const myQuery = {
     text: "INSERT INTO clothes (code, manufacturer, image_filename, short_description, description_more, promo) VALUES ($1, $2,$3,$4,$5,$6)",
-    values: [req.body.code, req.body.manufacturer, req.image_filename, req.body.short_description, req.body.description_more, req.body.promo]
+    values: [req.body.code, req.body.manufacturer, req.body.image_filename, req.body.short_description, req.body.description_more, req.body.promo]
   };
   client
     .query(myQuery)
@@ -112,8 +112,31 @@ app.get("/clothes", (req, resp) => {
 
 app.post("/manufacturer", (req, resp) => {
  console.log("In /manufacturer POST");
- resp.write("done");
- resp.end();
+
+ const myQuery = {
+  text: "INSERT INTO manufacturer (manufacturer_name, country, photo_link, description_short, more_description) VALUES ($1, $2,$3,$4,$5)",
+  values: [req.body.manufacturer_name, req.body.country, req.body.photo_link, req.body.description_short, req.body.more_description]
+};
+client
+  .query(myQuery)
+  .then(function (result) {
+    console.log("success!");
+    console.log(result.rowCount);
+    resp.writeHead(200, {
+      "Content-Type": "text/json",
+    });
+    resp.write(JSON.stringify("ok"));
+    resp.end();
+  })
+  .catch(function (error) {
+    console.log("ooops");
+    console.log(error);
+    resp.writeHead(200, {
+      "Content-Type": "text/json",
+    });
+    resp.write(JSON.stringify("Failed"));
+    resp.end();
+  });
 });
 
 app.get("/manufacturer", (req, resp) => {
