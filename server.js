@@ -16,9 +16,10 @@ const client = new Client({
 client.connect();
 
 
+//Testing delete method working at clothes 
 // app.delete("/clothes", (req, resp) => {
 //   console.log("In /clothes DELETE")
-//   resp.write("Please add the id at the path, eg like /clothes:21, inorder to delete at the id-21 ");
+//   resp.write("Please add the id at the path, eg like "/clothes:id", inorder to delete at the id-21 of RESter clothes/21 ");
 //   resp.end();
 
 // });
